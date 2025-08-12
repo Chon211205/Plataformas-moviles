@@ -1,0 +1,105 @@
+//Luis Lee
+//241203
+//Programación de plataformas móviles
+//Laboratorio #2
+//---------------------------------------------------------------------
+
+// Clase que representa los tipos de datos en la lista
+enum class ElementType {
+    ENTERO, CADENA, BOOLEANO, DESCONOCIDO
+}
+
+// Clase que representa los elementos procesados de la lista
+data class ItemData(
+    val originalPos: Int,
+    val originalValue: Any,
+    val type: ElementType,
+    val info: String
+) {
+    // Función para sobreescribir toString().
+    override fun toString(): String {
+        val valor = originalValue.toString()
+
+        val tipoTexto = when (type) {
+            ElementType.ENTERO -> "entero"
+            ElementType.CADENA -> "cadena"
+            ElementType.BOOLEANO -> "booleano"
+            else -> "desconocido"
+        }
+
+        return "'$valor' estaba en la posición $originalPos, es de tipo $tipoTexto e info es ${info.lowercase()}"
+    }
+}
+
+// Función que procesa los datos, determina su tipo y genera información extra
+fun processList(input: List<Any?>?): MutableList<ItemData>? {
+    // Si la lista es nula, se retorna null
+    if (input == null) {
+        return null
+    }
+
+    val resultado = mutableListOf<ItemData>()
+
+    input.forEachIndexed { index, valor ->
+        if (valor != null) {
+            // Determinar el tipo de dato
+            val type = when (valor) {
+                is Int -> ElementType.ENTERO
+                is String -> ElementType.CADENA
+                is Boolean -> ElementType.BOOLEANO
+                else -> ElementType.DESCONOCIDO
+            }
+
+            // Generar información extra segun el tipo de dato.
+            val info = when (valor) {
+                is Int -> {
+                    when {
+                        valor % 10 == 0 -> {
+                            "M10"
+                        }
+                        valor % 5 == 0 -> {
+                            "M5"
+                        }
+                        valor % 2 == 0 -> {
+                            "M2"
+                        }
+                        else -> {
+                            "-"
+                        }
+                    }
+                }
+
+                is String -> {
+                    "L${valor.length}"
+                }
+
+                is Boolean -> {
+                    if (valor) {
+                        "verdadero"
+                    } else {
+                        "falso"
+                    }
+                }
+
+                else -> {
+                    "desconocido"
+                }
+            }
+
+            // Agregar el elemento procesado a la lista
+            resultado.add(ItemData(index, valor, type, info))
+        }
+    }
+
+    return resultado
+}
+
+//Main
+fun main() {
+    val entrada = listOf(null, 11, "Universidad del valle de guatemala", true, 6, "PC", true, null)
+    val salida = processList(entrada)
+
+    salida?.forEach {
+        println(it)
+    }
+}
