@@ -1,0 +1,217 @@
+//Luis Lee
+//241203
+//Plataformas moviles
+//Laboratorio #1
+//----------------------------------------------------------
+
+fun main() {
+    //Declaracion de variables
+
+    //Productos
+    var Producto_1 = "Oreo"
+    var Producto_2 = "Gallo"
+    var Producto_3 = "Jamon"
+    var Producto_4 = "Pan"
+    var Producto_5 = "Laki"
+
+    //Stock
+    var Stock_1 = 10
+    var Stock_2 = 50
+    var Stock_3 = 30
+    var Stock_4 = 40
+    var Stock_5 = 60
+
+    //In_stock
+    //Guarda la cantidad de Stock en In_stock, con el criterio de que sea mayor a 0, para verificar la disponibilidad.
+    var In_stock_1 = Stock_1 > 0
+    var In_stock_2 = Stock_2 > 0
+    var In_stock_3 = Stock_3 > 0
+    var In_stock_4 = Stock_4 > 0
+    var In_stock_5 = Stock_5 > 0
+
+    //Funciones de manejo de inventario
+
+    //Funcion de registro de disponibilidad
+    fun Inventario_disponibilidad() {
+        In_stock_1 = Stock_1 > 0
+        In_stock_2 = Stock_2 > 0
+        In_stock_3 = Stock_3 > 0
+        In_stock_4 = Stock_4 > 0
+        In_stock_5 = Stock_5 > 0
+    }
+
+    //Funcion para desplegar inventario
+    fun Get_Inventario() {
+        println("---Inventario---")
+        //Evalua la disponibilidad de los productos para definir si desplegar que se encuentra disponible o no por medio de if-else.
+        //Producto 1
+        if (Stock_1 > 0) {
+            println("$Producto_1, Cantidad: $Stock_1, Disponibilidad: si") }
+        else {
+            println("$Producto_1, cantidad: $Stock_1, Disponibilidad: no")
+        }
+        //Producto 2
+        if (Stock_2 > 0) {
+            println("$Producto_2, Cantidad: $Stock_2, Disponibilidad: si") }
+        else {
+            println("$Producto_2, cantidad: $Stock_2, Disponibilidad: no")
+        }
+        //Producto 3
+        if (Stock_3 > 0) {
+            println("$Producto_3, Cantidad: $Stock_3, Disponibilidad: si") }
+        else {
+            println("$Producto_3, cantidad: $Stock_3, Disponibilidad: no")
+        }
+        //Producto 4
+        if (Stock_4 > 0) {
+            println("$Producto_4, Cantidad: $Stock_4, Cantidad: si") }
+        else {
+            println("$Producto_4, cantidad: $Stock_4, Cantidad: no")
+        }
+        //Producto 5
+        if (Stock_5 > 0) {
+            println("$Producto_5, Cantidad: $Stock_5, Cantidad: si") }
+        else {
+            println("$Producto_5, Cantidad: $Stock_5, Cantidad: no")
+        }
+    }
+
+    //Buscar producto en el inventario
+    fun Search_producto(Busqueda: String) {
+        val BusquedaLower = Busqueda.lowercase()
+        var Busqueda_completa = false
+
+        //Utiliza un when para identificar el producto que se esta buscando, guardado en la variable Busqueda_completa y obtener los datos del producto a buscar.
+        when {
+            //Si se busca el producto 1
+            Producto_1.lowercase() == BusquedaLower.lowercase() -> {
+                if (Stock_1 > 0) {
+                    println("$Producto_1, Cantidad: $Stock_1, Disponibilidad: si") }
+                else {
+                    println("$Producto_1, cantidad: $Stock_1, Disponibilidad: no")
+                }
+                Busqueda_completa = true
+            }
+            //Si se busca el producto 2
+            Producto_2.lowercase() == BusquedaLower.lowercase() -> {
+                if (Stock_2 > 0) {
+                    println("$Producto_2, Cantidad: $Stock_2, Disponibilidad: si") }
+                else {
+                    println("$Producto_2, cantidad: $Stock_2, Disponibilidad: no")
+                }
+                Busqueda_completa = true
+            }
+            //Si se busca el producto 3
+            Producto_3.lowercase() == BusquedaLower.lowercase() -> {
+                if (Stock_3 > 0) {
+                    println("$Producto_3, Cantidad: $Stock_3, Disponibilidad: si") }
+                else {
+                    println("$Producto_3, cantidad: $Stock_3, Disponibilidad: no")
+                }
+                Busqueda_completa = true
+            }
+            //Si se busca el producto 4
+            Producto_4.lowercase() == BusquedaLower.lowercase() -> {
+                if (Stock_4 > 0) {
+                    println("$Producto_4, Cantidad: $Stock_4, Cantidad: si") }
+                else {
+                    println("$Producto_4, cantidad: $Stock_4, Cantidad: no")
+                }
+                Busqueda_completa = true
+            }
+            //Si se busca el producto 5
+            Producto_5.lowercase() == BusquedaLower.lowercase() -> {
+                if (Stock_5 > 0) {
+                    println("$Producto_5, Cantidad: $Stock_5, Cantidad: si") }
+                else {
+                    println("$Producto_5, Cantidad: $Stock_5, Cantidad: no")
+                }
+                Busqueda_completa = true
+            }
+
+        }
+
+        if (!Busqueda_completa) {
+            println("No se logro encontrar el producto")
+        }
+    }
+
+    //Funcion para actualizar el inventario
+    fun Upgrade_inventario() {
+        println("---------------------------------")
+        println("1. Oreo")
+        println("2. Gallo")
+        println("3. Jamon")
+        println("4. Pan")
+        println("5. Laki")
+        println("Ingres el numero del producto que desea actualizar")
+        val Op = readLine()
+
+        //Se utiliza una lista inmutable que contiene los numeros de los respectivos productos. Esto para comprobar que el numero ingresado se encuentre dentro del rango.
+        if (Op in listOf("1", "2", "3", "4", "5")) {
+            println("Ingrese la nueva cantidad del producto (Maximo 99)")
+            //Guarda la nueva cantidad en Restock. Utiliza el toIntOrNull para convertir un string a int.
+            val Restock = readLine()?.toIntOrNull()
+
+            //Evalua que se cumpla el numero ingresado con un if-else, teniendo como criterio que sea mayor a o y que cumpla con el rango establecido.
+            if (Restock != null && Restock in 0..99) {
+                when (Op) {
+                    "1" -> Stock_1 = Restock
+                    "2" -> Stock_2 = Restock
+                    "3" -> Stock_3 = Restock
+                    "4" -> Stock_4 = Restock
+                    "5" -> Stock_5 = Restock
+                }
+                Inventario_disponibilidad()
+                println("Stock de productos completado")
+            }
+            else {
+                println("No se logro actualizar la disponibilidad del producto")
+            }
+        }
+        else {
+            println("Numero no disponible en la lista de productos")
+        }
+    }
+
+    //Funcion para mosrar estadistica de los productos
+    fun Estadistica() {
+        //Muestra todos los productos disponibles
+        val Productos_totales = listOf(In_stock_1, In_stock_2, In_stock_3, In_stock_4, In_stock_5).count {it}
+        //Muestra la cantidad total de productos
+        val Cantidad_total = Stock_1 + Stock_2 + Stock_3 + Stock_4 + Stock_5
+
+        //Muestra todos los datos totales
+        println("---Estadistica---")
+        println("Todos los productos disponibles: $Productos_totales")
+        println("Todas las cantidades totales de productos: $Cantidad_total")
+    }
+
+    //Interfaz
+    val x = "si"
+    while (x == "si") {
+        println("----Manejo de inventario----")
+        println("\n1. Visualizar el inventario")
+        println("2. Buscar un producto en el inventario")
+        println("3. Actualizar la cantidad de producto")
+        println("4. Mostrar estadisticas del inventario")
+        println("5. Salir del inventario")
+        println("\nIngrese el numero para elegir la respectiva opcion: ")
+
+        when (readLine()) {
+            "1" -> Get_Inventario()
+            "2" -> {
+                println("Ingrese el numero de producto a buscar: ")
+                val Producto = readLine()?: ""
+                Search_producto(Producto)
+            }
+            "3" -> Upgrade_inventario()
+            "4" -> Estadistica()
+            "5" -> {
+                println("Cerrando el programa.")
+                break
+            }
+            else -> println("Opcion no valida dentro del producto")
+        }
+    }
+}
